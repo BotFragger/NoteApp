@@ -1,8 +1,9 @@
-import React from "react";
+import React,{useState} from "react";
 
 function NoteInput({ onSubmit, onChangeTitle, onChangeBody, newTitle, newBody }) {
+    const [titleLength, setTitleLength] = useState(0);
     const handleTitleChange = (event) => {
-        const text = event.target.value;
+        const text = setTitleLength(event.target.value);
         if (text.length <= 50) {
             onChangeTitle(text);
         }
@@ -15,8 +16,8 @@ function NoteInput({ onSubmit, onChangeTitle, onChangeBody, newTitle, newBody })
                 <input className="input"
                     type="text"
                     id="newTitle"
-                    value={newTitle}
-                    onChange={onChangeTitle}
+                    value={titleLength}
+                    onChange={(event) => handleTitleChange(event)}
                 />
                 <label className="note-input__title" htmlFor="newBody">Body:</label>
                 <textarea className="note-input__body"
